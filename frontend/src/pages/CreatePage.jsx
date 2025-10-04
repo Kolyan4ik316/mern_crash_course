@@ -16,7 +16,7 @@ const CreatePage = () => {
         <Box w={"full"} bg={useColorModeValue("white", "gray.800")}
         p={6} rounded={"lg"} shadow={"md"}
         >
-        //
+        
         <VStack spacing={4}>
           <Input placeholder=""/>
           
