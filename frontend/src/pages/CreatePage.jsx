@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Button, Box, Container, Heading, VStack, Input} from '@chakra-ui/react'
+import { Button, Box, Container, Heading, VStack, Input, Dialog} from '@chakra-ui/react'
 import {useColorModeValue} from '../components/ui/color-mode'
-import {toaster } from '../components/ui/toaster'
+import { toaster } from '../components/ui/toaster'
 import { useProductStore } from '../store/product'
 
 const CreatePage = () => {
@@ -13,8 +13,8 @@ const CreatePage = () => {
   const {createProduct} = useProductStore()
   const handleAddProduct = async()=>
   {
-    const {succsess, message} = await createProduct(newProduct)
-    if(!succsess){
+    const {success, message} = await createProduct(newProduct)
+    if(!success){
       toaster.create({
         title: "Error",
         type: "error",
@@ -24,13 +24,13 @@ const CreatePage = () => {
       }
     else{
       toaster.create({
-        title: "Succsess",
+        title: "Success",
         type: "success",
         description: message,
         duration: 1500
         })
     }
-    console.log("Succsess:", succsess, "Message:", message)
+    console.log("Success:", success, "Message:", message)
     setnewProduct(
       { name: "",
         price: "",
@@ -40,12 +40,12 @@ const CreatePage = () => {
   }
   return (
     <Container maxW ={"800px"}>
-      <VStack spacing = {8}>
+      <VStack gap = {8}>
         <Heading as={"h1"} size={"5xl"} textAlign={"center"} mb={8}>
           Create New Product
         </Heading>
         <Box w={"full"} bg={useColorModeValue("white", "gray.801")} p={6} rounded={"lg"} shadow={"md"}>
-          <VStack spacing={4}>
+          <VStack gap={4}>
             <Input placeholder="Product Name"
               name="name"
               value ={ newProduct.name }

@@ -32,7 +32,7 @@ const Navbar = () => {
             Product Store 🛒
           </Text>
         </ChakraLink>
-        <HStack spacing = {2} alignItems={"center"}>
+        <HStack gap = {2} alignItems={"center"}>
           <ChakraLink as={ReactRouterLink} to={"/create"} _hover={{ textDecoration: "none" }}
   _focus={{ boxShadow: "none", outline: "none" }}>
             <Button fontSize={20}>

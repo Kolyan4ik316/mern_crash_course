@@ -11,6 +11,32 @@ export const useProductStore = create((set) => ({
             body: JSON.stringify(newProduct)})
         const data = await res.json()
         set((state) => ({products: [...state.products, data.data]}))
-        return {succsess: true, message: " Product created successfully."}
-        }
+        return {succsess: true, message: data.message}
+    },
+    fetchProducts: async () => {
+        const res = await fetch("api/products")
+        const data = await res.json()
+        set({products: data.data})
+    },
+    deleteProduct: async (p_id) => {
+        const res = await fetch(`api/products/${p_id}`, {method: "DELETE"})
+        const data = await res.json()
+        if(!data.success) return {success: false, message: data.message}
+        set((state) => ({products: state.products.filter((p) => p._id !== p_id)}))
+        return {success: true, message: data.message}
+    },
+    updateProduct: async (p_id, updatedProduct) => {
+        const res = await fetch(`api/products/${p_id}`, {method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(updatedProduct)})
+        const data = await res.json()
+        if(!data.success) return {success: false, message: data.message}
+        set((state) => ({
+            products: state.products.map((p) => 
+                p._id === p_id ? data.data : p
+            )
+        }))
+        return ({success: true, message: data.message
+        })
+    }
 }))
