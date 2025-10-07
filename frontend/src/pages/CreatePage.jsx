@@ -21,7 +21,7 @@ const CreatePage = () => {
         description: message,
         duration: 1500
         })
-      }
+    }
     else{
       toaster.create({
         title: "Success",
@@ -30,7 +30,6 @@ const CreatePage = () => {
         duration: 1500
         })
     }
-    console.log("Success:", success, "Message:", message)
     setnewProduct(
       { name: "",
         price: "",
